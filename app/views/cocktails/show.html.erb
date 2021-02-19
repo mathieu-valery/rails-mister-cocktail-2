@@ -1,8 +1,39 @@
-<h1><%= @cocktail.name %></h1>
-<% @cocktail.doses.each do |dose| %>
-    <td><%= dose.ingredient.name %></td>
-    <td><%= dose.description %></td>
-<%end%>
+<div class='container'>
+    <h1><%= @cocktail.name %></h1>
 
-<%= link_to "Add ingredients", new_cocktail_dose_path(@cocktail) %>
-<%= link_to 'Back to List', root_path  %>
+    <% if @cocktail.photo.attached? %>
+        <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill %>
+    <% else%>
+        <div class="empty-card"></div>
+    <% end %>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <h2>Recipe</h2>
+
+            <table class="table">
+                <tbody>
+                    <thead>
+                    <th>Ingredient</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                    </thead>
+                    <% @doses.each do |dose| %>
+                        <tr>
+                            <td><%= dose.ingredient.name  %></td>
+                            <td><%= dose.description %></td>
+                            <td><%= link_to "Delete",
+                                dose_path(dose),
+                                method: :delete,
+                                data: { confirm: "Are you sure?" }%></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <%= link_to "Add ingredients", new_cocktail_dose_path(@cocktail) %><br>
+    <%= link_to 'Back to List', root_path  %>
+
+</div>
