@@ -9,8 +9,8 @@ require("@rails/activestorage").start()
 require("channels")
 
 import 'bootstrap';
-import { initSelect2 } from '../components/init_select2';
+// import { initSelect2 } from '../components/init_select2';
 
-document.addEventListener("turbolinks:load", function() {
-  initSelect2();
-});
+// document.addEventListener("turbolinks:load", function() {
+//   initSelect2();
+// });
